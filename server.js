@@ -18,8 +18,13 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect('mongodb://localhost:27017/blogDB', {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
-  
+const DB_Password = process.env.DB_Password;
+const DB_Username = process.env.DB_Username;
+
+// mongoose.connect('mongodb://localhost:27017/blogDB', {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+mongoose.connect('mongodb+srv://admin-'+DB_Username+':'+DB_Password+'@cluster0-2xnk3.gcp.mongodb.net/blogDB',
+  {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+    
   if(err) console.log("Error in connecting with DB : " + err);
   else console.log("Connected to DB");
 });
@@ -70,7 +75,7 @@ app.post("/compose", function(req, res){
 
   newPost.save(function(err){
     if (err) return console.error(err);
-    console.log("Document inserted successfully!");
+    else console.log("Document inserted successfully!");
     res.redirect("/");
     });
 });
