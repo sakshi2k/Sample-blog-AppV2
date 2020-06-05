@@ -24,6 +24,8 @@ mongoose.connect('mongodb://localhost:27017/blogDB', {useNewUrlParser: true, use
   else console.log("Connected to DB");
 });
 
+require('dotenv').config();
+
 // To remove {
 const postSchema = {
   title: String,
@@ -71,10 +73,6 @@ app.post("/compose", function(req, res){
     console.log("Document inserted successfully!");
     res.redirect("/");
     });
-
-  // newPost.save();
-  
-  // console.log("Post not added");
 });
 
 app.get("/posts/:postName", function(req, res){
@@ -91,6 +89,6 @@ app.get("/posts/:postName", function(req, res){
 
 });
 
-app.listen(3000, function() {
-  console.log("Server started on port 3000");
+app.listen(process.env.PORT || 3000, function() {
+  console.log("Server started on port ");
 });
