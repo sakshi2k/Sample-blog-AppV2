@@ -4,6 +4,9 @@ const ejs = require("ejs");
 const _ = require("lodash");
 const mongoose = require("mongoose");
 
+// Config variables
+require('dotenv').config();
+
 // const Post = require("./models/Post");
 
 // const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
@@ -21,13 +24,16 @@ app.use(express.static("public"));
 const DB_Password = process.env.DB_Password;
 const DB_Username = process.env.DB_Username;
 
-// mongoose.connect('mongodb://localhost:27017/blogDB', {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
-mongoose.connect('mongodb+srv://admin-'+DB_Username+':'+DB_Password+'@cluster0-2xnk3.gcp.mongodb.net/blogDB',
-  {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
-    
-  if(err) console.log("Error in connecting with DB : " + err);
-  else console.log("Connected to DB");
-});
+const uri = "mongodb+srv://admin-"+DB_Username+":"+DB_Password+"@cluster0-2xnk3.gcp.mongodb.net/blogDB?retryWrites=true&w=majority";
+
+// const uri = "mongodb://localhost:27017/blogDB";
+console.log(uri)
+// mongoose.connect("", {useNewUrlParser: true});
+
+mongoose
+     .connect( uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+     .then(() => console.log( 'Database Connected' ))
+     .catch(err => console.log("ERROR in connecting BD : " + err ));
 
 require('dotenv').config();
 
