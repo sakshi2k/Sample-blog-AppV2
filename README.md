@@ -10,6 +10,9 @@ https://my-blog-app-v1.herokuapp.com/
 go to route -> /compose
 
 Other routes :
+
 /about                        // About page
+
 /contact                      // Contact page
+
 /posts/:postName              // to get specific post from params
