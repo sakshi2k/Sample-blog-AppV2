@@ -11,8 +11,11 @@ go to route -> /compose
 
 Other routes :
 
-/about                        // About page
+/about                        
+ - About page
 
-/contact                      // Contact page
+/contact                      
+ - Contact page
 
-/posts/:postName              // to get specific post from params
+/posts/:postName              
+ - to get specific post from params
